@@ -46,9 +46,14 @@ void PhanSo::setMauSo(int x){
     mauSo = x;
 }
 void PhanSo::nghichDao(){
-    int tmp = tuSo;
-    tuSo = mauSo;
-    mauSo = tmp;
+    if (tuSo == 0){
+        cout << "\nKhong nghich dao duoc!\n";
+    }else{
+        int tmp = tuSo;
+        tuSo = mauSo;
+        mauSo = tmp;
+    }
+
 }
 int PhanSo::ucln(int a, int b){
     if (a < 0) a = 0 - a;
