@@ -31,7 +31,7 @@ void PhanSo::nhap(){
 void PhanSo::xuat(){
     if (tuSo == 0) cout << '0';
     else if(mauSo == 1) cout << tuSo;
-
+    else cout << tuSo << '/' << mauSo;
 }
 int PhanSo::getTuSo(){
     return tuSo;
