@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
 using namespace std;
 
 class SV
@@ -39,23 +40,90 @@ public:
     void input();
 };
 
+
+
 int main()
 {
-    SV* sinhVienTaiChuc = new SVTC;
-    SV* sinhVienCuNhan = new SVCN;
-
-    cout << "Nhap sinh vien tai chuc:\n";
-    sinhVienTaiChuc->input();
-    cout << "\nNhap sinh vien cu nhan:\n";
-    sinhVienCuNhan->input();
-
-    cout << "\nThong tin sinh vien:";
-    cout << "\nSinh vien tai chuc:\n";
-    sinhVienTaiChuc->show();
-    cout << "\nSinh vien cu nhan:\n";
-    sinhVienCuNhan->show();
-
-    return 0;
+    SV* sv[10];
+    int i = 0;
+    int x;
+    while (true)
+    {
+        system("cls");
+        cout << "Menu:";
+        cout << "\n1. Nhap thong tin sinh vien tai chuc.";
+        cout << "\n2. Nhap thong tin sinh vien cu nhan.";
+        cout << "\n3. Xuat thong tin tat ca sinh vien.";
+        cout << "\n4. Xuat thong tin sinh vien tai chuc.";
+        cout << "\n5. Xuat thong tin sinh vien cu nhan.";
+        cout << "\n6. Thoat.";
+        cout << "\nNhap lua chon: ";
+        cin >> x;
+        switch (x)
+        {
+            case 1:
+            {
+                SV* svtc_ = new SVTC;
+                svtc_->input();
+                sv[i++] = svtc_;
+                cout << '\n';system("pause");
+                break;
+            }
+            case 2:
+            {
+                SV* svcn_ = new SVCN;
+                svcn_->input();
+                sv[i++] = svcn_;
+                cout << '\n';system("pause");
+                break;
+            }
+            case 3:
+            {
+                for (int j = 0; j < i; ++j)
+                {
+                    sv[j]->show();
+                    cout << '\n';
+                }
+                cout << '\n';system("pause");
+                break;
+            }
+            case 4:
+            {
+                cout << "\nThong tin sinh vien tai chuc:";
+                for (int j = 0; j < i; ++j)
+                {
+                    SVTC* svtc_ = dynamic_cast<SVTC*>(sv[j]);
+                    if (svtc_ != nullptr) svtc_->show();
+                }
+                cout << '\n';system("pause");
+                break;
+            }
+            case 5:
+            {
+                cout << "\nThong tin sinh vien cu nhan:";
+                for (int j = 0; j < i; ++j)
+                {
+                    cout << '\n';
+                    SVCN* svcn_ = dynamic_cast<SVCN*>(sv[j]);
+                    if (svcn_ != nullptr) svcn_->show();
+                }
+                cout << '\n';system("pause");
+                break;
+            }
+            case 6:
+            {
+                return 0;
+                break;
+            }
+            default:
+            {
+                cout << "Lua chon khong hop le!. Nhap lai lua chon: ";
+                cin >> x;
+                break;
+            }
+        }
+    }
+    
 }
 
 //Sinh vien
@@ -81,6 +149,7 @@ void SV::show()
 void SV::input()
 {
     cout << "\nNhap ten: ";
+    cin.ignore();
     getline(cin, Hoten);
 
     cout << "Nhap lop: ";
@@ -100,17 +169,17 @@ void SVTC::show()
 {
     SV::show();
     cout << '\n' << "Hoc phi: " << Hocphi;
-    while (Hocphi < 0)
-    {
-        cout << "Nhap sai hoc phi!!. Nhap lai hoc phi: ";
-        cin >> Hocphi;
-    }
 }
 void SVTC::input()
 {
     SV::input();
     cout << "Nhap hoc phi: ";
     cin >> Hocphi;
+    while (Hocphi < 0)
+    {
+        cout << "Hoc phi khong hop le!. Nhap lai hoc phi: ";
+        cin >> Hocphi;
+    }
 }
 
 //Sinh vien cu nhan
