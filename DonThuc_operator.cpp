@@ -6,6 +6,9 @@ private:
     float heSo;
     int soMu;
 public:
+    DonThuc();
+    DonThuc(float heSo, int soMu);
+    DonThuc(const DonThuc& dt);
     friend istream& operator>>(istream& is, DonThuc &x);
     friend ostream& operator<<(ostream& os, DonThuc &x);
     float getHeSo() { return heSo; }
@@ -19,6 +22,18 @@ public:
     int DonThuc::operator==(DonThuc x);
     float value(float x);
 };
+DonThuc::DonThuc(){
+    heSo = 2;
+    soMu = 1;
+}
+DonThuc::DonThuc(float heSo, int soMu){
+    this->heSo = heSo;
+    this->soMu = soMu;
+}
+DonThuc::DonThuc(const DonThuc& dt){
+    heSo = dt.heSo;
+    soMu = dt.soMu;
+}
 istream& operator>>(istream& is, DonThuc &x){
     cout << "\nNhap he so va so mu: ";
     is >> x.heSo >> x.soMu;
