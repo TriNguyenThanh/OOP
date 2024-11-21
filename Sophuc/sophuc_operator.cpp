@@ -22,6 +22,7 @@ public:
     SoPhuc operator*(SoPhuc x);
     SoPhuc operator/(SoPhuc x);
     int operator==(SoPhuc x);
+    int operator < (SoPhuc x);
     friend int tong(SoPhuc x);
 };
 
@@ -148,9 +149,18 @@ SoPhuc SoPhuc::operator/(SoPhuc x){
 
     return n;
 }
+
 int SoPhuc::operator==(SoPhuc x){
     int tmp = this->module() - x.module();
     if (tmp == 0) return 0;
     if (tmp < 0) return -1;
     if (tmp > 0) return 1;
 }
+int SoPhuc::operator<(SoPhuc x){
+    if (this->module() < x.module())
+        return 1;
+    else if (this->module() > x.module())
+        return -1;
+    else
+        return 0;
+}       
